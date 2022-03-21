@@ -1,10 +1,12 @@
 package com.woogie.calculator.operand;
 
+import com.woogie.calculator.Arithmetic;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Operand {
+public class Operand implements Arithmetic {
     private final BigDecimal value;
 
     public Operand(double value) {
