@@ -10,7 +10,7 @@ class AdditionOperatorTest {
 
     @Test
     void 두_정수를_입력받아_더한다() {
-        Operable additionOperator = new AdditionOperator();
+        final Operable additionOperator = new AdditionOperator();
 
         final BigDecimal result = additionOperator.execute(BigDecimal.valueOf(2), BigDecimal.valueOf(3));
 
@@ -19,7 +19,7 @@ class AdditionOperatorTest {
 
     @Test
     void 두_무리수를_입력받아_더한다() {
-        Operable additionOperator = new AdditionOperator();
+        final Operable additionOperator = new AdditionOperator();
 
         final BigDecimal result = additionOperator.execute(BigDecimal.valueOf(1.3), BigDecimal.valueOf(2.2));
 
