@@ -1,5 +1,7 @@
 package com.woogie.calculator;
 
+import com.woogie.calculator.operator.Operable;
+import com.woogie.calculator.operator.SubtractionOperator;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
