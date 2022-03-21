@@ -1,10 +1,10 @@
 package com.woogie.calculator.operator;
 
-import java.math.BigDecimal;
+import com.woogie.calculator.operand.Operand;
 
 public class SubtractionOperator implements Operable {
     @Override
-    public BigDecimal execute(BigDecimal augend, BigDecimal addend) {
-        return augend.add(addend.negate());
+    public Operand execute(Operand augend, Operand addend) {
+        return new Operand(augend.getValue().add(addend.getValue().negate()));
     }
 }

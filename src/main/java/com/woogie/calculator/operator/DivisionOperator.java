@@ -1,6 +1,7 @@
 package com.woogie.calculator.operator;
 
-import java.math.BigDecimal;
+import com.woogie.calculator.operand.Operand;
+
 import java.math.RoundingMode;
 
 public class DivisionOperator implements Operable {
@@ -19,7 +20,7 @@ public class DivisionOperator implements Operable {
     }
 
     @Override
-    public BigDecimal execute(BigDecimal augend, BigDecimal addend) {
-        return augend.divide(addend, scale, roundingMode);
+    public Operand execute(Operand augend, Operand addend) {
+        return new Operand(augend.getValue().divide(addend.getValue(), scale, roundingMode));
     }
 }

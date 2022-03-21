@@ -1,7 +1,7 @@
 package com.woogie.calculator.operator;
 
-import java.math.BigDecimal;
+import com.woogie.calculator.operand.Operand;
 
 public interface Operable {
-    BigDecimal execute(BigDecimal augend, BigDecimal addend);
+    Operand execute(Operand augend, Operand addend);
 }
