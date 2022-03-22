@@ -2,9 +2,9 @@ package com.woogie.calculator.operator;
 
 import com.woogie.calculator.operand.Operand;
 
-public class SubtractionOperator implements Operable {
+public class Subtraction implements Operable {
     @Override
-    public Operand execute(Operand augend, Operand addend) {
+    public Operand operate(Operand augend, Operand addend) {
         return new Operand(augend.getValue().add(addend.getValue().negate()));
     }
 }

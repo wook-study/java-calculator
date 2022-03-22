@@ -10,13 +10,13 @@ public enum Operator implements Expression {
     MULTIPLICATION("*"),
     DIVISION("/");
 
-    private final String op;
+    private final String code;
 
-    Operator(final String op) {
-        this.op = op;
+    Operator(final String code) {
+        this.code = code;
     }
 
-    public String getOp() {
-        return op;
+    public String getCode() {
+        return code;
     }
 }

@@ -2,9 +2,9 @@ package com.woogie.calculator.operator;
 
 import com.woogie.calculator.operand.Operand;
 
-public class AdditionOperator implements Operable {
+public class Addition implements Operable {
     @Override
-    public Operand execute(final Operand augend, final Operand addend) {
+    public Operand operate(final Operand augend, final Operand addend) {
         return new Operand(augend.getValue().add(addend.getValue()));
     }
 }
