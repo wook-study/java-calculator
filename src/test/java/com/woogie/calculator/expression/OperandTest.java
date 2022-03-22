@@ -1,6 +1,5 @@
-package com.woogie.calculator.domain.expression;
+package com.woogie.calculator.expression;
 
-import com.woogie.calculator.domain.expression.Operand;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

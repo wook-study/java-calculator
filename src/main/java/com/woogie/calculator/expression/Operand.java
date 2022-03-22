@@ -1,4 +1,4 @@
-package com.woogie.calculator.domain.expression;
+package com.woogie.calculator.expression;
 
 import java.math.BigDecimal;
 import java.util.Objects;

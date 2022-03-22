@@ -1,6 +1,6 @@
 package com.woogie.calculator.component;
 
-import com.woogie.calculator.domain.expression.Expression;
+import com.woogie.calculator.expression.Expression;
 
 import java.util.Collection;
 import java.util.List;

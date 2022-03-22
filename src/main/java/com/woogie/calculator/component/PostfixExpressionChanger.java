@@ -1,18 +1,17 @@
 package com.woogie.calculator.component;
 
-import com.woogie.calculator.domain.expression.Expression;
-import com.woogie.calculator.domain.expression.Operand;
-import com.woogie.calculator.domain.expression.Operator;
+import com.woogie.calculator.expression.Expression;
+import com.woogie.calculator.expression.Operand;
+import com.woogie.calculator.expression.Operator;
 
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 public class PostfixExpressionChanger implements ExpressionChanger {
     @Override
-    public Stack<Expression> change(final List<Expression> expressions) {
-        final Stack<Expression> postfixExpressions = new Stack<>();
+    public Queue<Expression> change(final List<Expression> expressions) {
+        final Queue<Expression> postfixExpressions = new ArrayDeque<>();
         final Queue<Expression> temporaryOperators = new ArrayDeque<>();
 
         for (final Expression expression : expressions) {
@@ -30,7 +29,7 @@ public class PostfixExpressionChanger implements ExpressionChanger {
         }
     }
 
-    private void saveAsPostfix(final Stack<Expression> postfixExpressions, final Queue<Expression> temporaryOperators, final Expression expression) {
+    private void saveAsPostfix(final Queue<Expression> postfixExpressions, final Queue<Expression> temporaryOperators, final Expression expression) {
         if (expression instanceof Operand) {
             postfixExpressions.add(expression);
 

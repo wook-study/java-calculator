@@ -1,4 +1,4 @@
-package com.woogie.calculator.domain.expression;
+package com.woogie.calculator.expression;
 
 public class Addition implements Operable {
     @Override

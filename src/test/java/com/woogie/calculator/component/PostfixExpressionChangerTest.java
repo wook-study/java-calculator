@@ -1,12 +1,12 @@
 package com.woogie.calculator.component;
 
-import com.woogie.calculator.domain.expression.Expression;
-import com.woogie.calculator.domain.expression.Operand;
-import com.woogie.calculator.domain.expression.Operator;
+import com.woogie.calculator.expression.Expression;
+import com.woogie.calculator.expression.Operand;
+import com.woogie.calculator.expression.Operator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Stack;
+import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,14 +18,14 @@ class PostfixExpressionChangerTest {
 
         final PostfixExpressionChanger postfixExpressionChanger = new PostfixExpressionChanger();
 
-        final Stack<Expression> postfixExpressions = postfixExpressionChanger.change(inorderExpressions);
+        final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(inorderExpressions);
 
         assertThat(postfixExpressions.size() == inorderExpressions.size()).isTrue();
 
-        assertThat(postfixExpressions.pop()).isEqualTo(Operator.MULTIPLICATION);
-        assertThat(postfixExpressions.pop()).isEqualTo(new Operand(4));
-        assertThat(postfixExpressions.pop()).isEqualTo(Operator.ADDITION);
-        assertThat(postfixExpressions.pop()).isEqualTo(new Operand(2));
-        assertThat(postfixExpressions.pop()).isEqualTo(new Operand(3));
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(3));
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(2));
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.ADDITION);
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(4));
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.MULTIPLICATION);
     }
 }

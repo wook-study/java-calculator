@@ -1,7 +1,4 @@
-package com.woogie.calculator.domain.expression;
-
-import com.woogie.calculator.domain.expression.Operand;
-import com.woogie.calculator.domain.expression.Operable;
+package com.woogie.calculator.expression;
 
 public class Multiplication implements Operable {
     @Override
