@@ -1,4 +1,4 @@
 package com.woogie.calculator;
 
-public interface Arithmetic {
+public interface Expression {
 }

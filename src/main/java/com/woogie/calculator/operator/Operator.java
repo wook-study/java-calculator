@@ -1,8 +1,8 @@
 package com.woogie.calculator.operator;
 
-import com.woogie.calculator.Arithmetic;
+import com.woogie.calculator.Expression;
 
-public enum Operator implements Arithmetic {
+public enum Operator implements Expression {
     OPENED_BRACE("("),
     CLOSED_BRACE(")"),
     ADDITION("+"),
