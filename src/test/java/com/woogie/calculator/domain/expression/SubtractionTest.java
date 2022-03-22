@@ -1,6 +1,8 @@
-package com.woogie.calculator.operator;
+package com.woogie.calculator.domain.expression;
 
-import com.woogie.calculator.operand.Operand;
+import com.woogie.calculator.domain.expression.Operand;
+import com.woogie.calculator.domain.expression.Operable;
+import com.woogie.calculator.domain.expression.Subtraction;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,8 @@
-package com.woogie.calculator.operator;
+package com.woogie.calculator.domain.expression;
 
-import com.woogie.calculator.operand.Operand;
+import com.woogie.calculator.domain.expression.Operand;
+import com.woogie.calculator.domain.expression.Division;
+import com.woogie.calculator.domain.expression.Operable;
 import org.junit.jupiter.api.Test;
 
 import java.math.RoundingMode;

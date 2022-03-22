@@ -1,6 +1,6 @@
-package com.woogie.calculator.operator;
+package com.woogie.calculator.domain.expression;
 
-import com.woogie.calculator.Expression;
+import com.woogie.calculator.domain.expression.Expression;
 
 public enum Operator implements Expression {
     OPENED_BRACE("("),

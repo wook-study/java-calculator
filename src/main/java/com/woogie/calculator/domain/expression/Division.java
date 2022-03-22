@@ -1,6 +1,4 @@
-package com.woogie.calculator.operator;
-
-import com.woogie.calculator.operand.Operand;
+package com.woogie.calculator.domain.expression;
 
 import java.math.RoundingMode;
 

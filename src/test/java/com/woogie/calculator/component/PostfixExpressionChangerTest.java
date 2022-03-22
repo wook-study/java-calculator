@@ -1,8 +1,8 @@
 package com.woogie.calculator.component;
 
-import com.woogie.calculator.Expression;
-import com.woogie.calculator.operand.Operand;
-import com.woogie.calculator.operator.Operator;
+import com.woogie.calculator.domain.expression.Expression;
+import com.woogie.calculator.domain.expression.Operand;
+import com.woogie.calculator.domain.expression.Operator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
