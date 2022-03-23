@@ -3,8 +3,8 @@ package com.woogie.calculator.component;
 import com.woogie.calculator.expression.Expression;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Queue;
 
 public interface ExpressionChanger {
-    Collection<Expression> change(List<Expression> expressions);
+    Collection<Expression> change(Queue<Expression> expressions);
 }

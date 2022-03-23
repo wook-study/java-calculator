@@ -1,41 +1,56 @@
 package com.woogie.calculator.component;
 
 import com.woogie.calculator.expression.Expression;
-import com.woogie.calculator.expression.Operand;
 import com.woogie.calculator.expression.Operator;
 
 import java.util.ArrayDeque;
-import java.util.List;
 import java.util.Queue;
 
 public class PostfixExpressionChanger implements ExpressionChanger {
     @Override
-    public Queue<Expression> change(final List<Expression> expressions) {
+    public Queue<Expression> change(final Queue<Expression> expressions) {
         final Queue<Expression> postfixExpressions = new ArrayDeque<>();
-        final Queue<Expression> temporaryOperators = new ArrayDeque<>();
+        final Queue<Operator> temporaryOperators = new ArrayDeque<>();
 
-        for (final Expression expression : expressions) {
-            saveOperatorAsTemporary(temporaryOperators, expression);
+        while (!expressions.isEmpty()) {
+            addOperandsUntilOperator(postfixExpressions, expressions);
 
-            saveAsPostfix(postfixExpressions, temporaryOperators, expression);
+            final Expression expression = expressions.poll();
+
+            if (!(expression instanceof Operator)) {
+                break;
+            }
+
+            addOperatorsInOrder(temporaryOperators, (Operator) expression);
         }
+
+        postfixExpressions.addAll(temporaryOperators);
 
         return postfixExpressions;
     }
 
-    private void saveOperatorAsTemporary(final Queue<Expression> temporaryOperators, final Expression expression) {
-        if (expression instanceof Operator) {
-            temporaryOperators.add(expression);
+    private void addOperandsUntilOperator(final Queue<Expression> operands, final Queue<Expression> expressions) {
+        while (!expressions.isEmpty()) {
+            final Expression expression = expressions.peek();
+
+            if (expression instanceof Operator) {
+                break;
+            }
+
+            operands.add(expressions.poll());
         }
     }
 
-    private void saveAsPostfix(final Queue<Expression> postfixExpressions, final Queue<Expression> temporaryOperators, final Expression expression) {
-        if (expression instanceof Operand) {
-            postfixExpressions.add(expression);
+    private void addOperatorsInOrder(final Queue<Operator> operators, final Operator operator) {
+        final Operator previous = operators.peek();
 
-            if (!temporaryOperators.isEmpty()) {
-                postfixExpressions.add(temporaryOperators.poll());
-            }
+        if (operators.isEmpty() || previous.priority(operator)) {
+            operators.add(operator);
+        } else {
+            operators.poll();
+
+            operators.add(operator);
+            operators.add(previous);
         }
     }
 }
