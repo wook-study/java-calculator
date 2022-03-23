@@ -8,12 +8,16 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class PostfixCalculator implements Calculatable<Queue<Expression>> {
+    private final Stack<Operand> operands;
+
+    public PostfixCalculator() {
+        this.operands = new Stack<>();
+    }
+
     @Override
     public Operand calculate(final Queue<Expression> expressions) {
-        final Stack<Operand> operands = new Stack<>();
-
         while (!expressions.isEmpty()) {
-            addOperandsUntilOperator(operands, expressions);
+            addOperandsUntilOperator(expressions);
 
             final Expression expression = expressions.poll();
 
@@ -21,13 +25,13 @@ public class PostfixCalculator implements Calculatable<Queue<Expression>> {
                 break;
             }
 
-            addCalculatedOperand(operands, (Operator) expression);
+            addCalculatedOperand((Operator) expression);
         }
 
         return operands.pop();
     }
 
-    private void addOperandsUntilOperator(final Stack<Operand> operands, final Queue<Expression> expressions) {
+    private void addOperandsUntilOperator(final Queue<Expression> expressions) {
         while (true) {
             final Expression expression = expressions.peek();
 
@@ -39,7 +43,7 @@ public class PostfixCalculator implements Calculatable<Queue<Expression>> {
         }
     }
 
-    private void addCalculatedOperand(Stack<Operand> operands, Operator operator) {
+    private void addCalculatedOperand(Operator operator) {
         final Operand augend = operands.pop();
         final Operand addend = operands.pop();
 

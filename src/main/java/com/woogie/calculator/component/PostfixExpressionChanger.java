@@ -7,13 +7,18 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class PostfixExpressionChanger implements ExpressionChanger {
+    private final Queue<Expression> postfixExpressions;
+    private final Queue<Operator> temporaryOperators;
+
+    public PostfixExpressionChanger() {
+        this.postfixExpressions = new ArrayDeque<>();
+        this.temporaryOperators = new ArrayDeque<>();
+    }
+
     @Override
     public Queue<Expression> change(final Queue<Expression> expressions) {
-        final Queue<Expression> postfixExpressions = new ArrayDeque<>();
-        final Queue<Operator> temporaryOperators = new ArrayDeque<>();
-
         while (!expressions.isEmpty()) {
-            addOperandsUntilOperator(postfixExpressions, expressions);
+            addOperandsUntilOperator(expressions);
 
             final Expression expression = expressions.poll();
 
@@ -21,7 +26,7 @@ public class PostfixExpressionChanger implements ExpressionChanger {
                 break;
             }
 
-            addOperatorsInOrder(temporaryOperators, (Operator) expression);
+            addOperatorsInOrder((Operator) expression);
         }
 
         postfixExpressions.addAll(temporaryOperators);
@@ -29,7 +34,7 @@ public class PostfixExpressionChanger implements ExpressionChanger {
         return postfixExpressions;
     }
 
-    private void addOperandsUntilOperator(final Queue<Expression> operands, final Queue<Expression> expressions) {
+    private void addOperandsUntilOperator(final Queue<Expression> expressions) {
         while (!expressions.isEmpty()) {
             final Expression expression = expressions.peek();
 
@@ -37,20 +42,20 @@ public class PostfixExpressionChanger implements ExpressionChanger {
                 break;
             }
 
-            operands.add(expressions.poll());
+            postfixExpressions.add(expressions.poll());
         }
     }
 
-    private void addOperatorsInOrder(final Queue<Operator> operators, final Operator operator) {
-        final Operator previous = operators.peek();
+    private void addOperatorsInOrder(final Operator operator) {
+        final Operator previous = temporaryOperators.peek();
 
-        if (operators.isEmpty() || previous.priority(operator)) {
-            operators.add(operator);
+        if (temporaryOperators.isEmpty() || previous.priority(operator)) {
+            temporaryOperators.add(operator);
         } else {
-            operators.poll();
+            temporaryOperators.poll();
 
-            operators.add(operator);
-            operators.add(previous);
+            temporaryOperators.add(operator);
+            temporaryOperators.add(previous);
         }
     }
 }
