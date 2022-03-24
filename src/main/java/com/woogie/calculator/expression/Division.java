@@ -2,6 +2,9 @@ package com.woogie.calculator.expression;
 
 import java.math.RoundingMode;
 
+/**
+ * 나눗셈 오퍼레이터
+ */
 public class Division implements Operable {
 
     private final int scale;

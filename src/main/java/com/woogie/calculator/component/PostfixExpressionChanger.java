@@ -6,6 +6,9 @@ import com.woogie.calculator.expression.Operator;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+/**
+ * 후위표현식으로 표현방식 변경
+ */
 public class PostfixExpressionChanger implements ExpressionChanger {
     private final Queue<Expression> postfixExpressions;
     private final Queue<Operator> temporaryOperators;

@@ -7,6 +7,9 @@ import com.woogie.calculator.expression.Operator;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * 후위표현식 계산
+ */
 public class PostfixCalculator implements Calculatable<Queue<Expression>> {
     private final Stack<Operand> operands;
 

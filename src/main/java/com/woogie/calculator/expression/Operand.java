@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * 피연산자
+ */
 public class Operand implements Expression {
     private final BigDecimal value;
 

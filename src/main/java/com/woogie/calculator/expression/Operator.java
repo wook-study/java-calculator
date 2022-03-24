@@ -2,6 +2,9 @@ package com.woogie.calculator.expression;
 
 import java.util.function.BiFunction;
 
+/**
+ * 연산자
+ */
 public enum Operator implements Expression {
     ADDITION("+", 0, (augend, addend) -> new Addition().operate(augend, addend)),
     SUBTRACTION("-", 0, (augend, addend) -> new Subtraction().operate(augend, addend)),
