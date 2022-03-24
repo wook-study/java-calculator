@@ -1,6 +1,7 @@
 package com.woogie.calculator.expression;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,7 +22,16 @@ public class Operand implements Expression {
     }
 
     public BigDecimal getValue() {
-        return value;
+        return this.value;
+    }
+
+    public BigDecimal getValue(int scale) {
+        //noinspection BigDecimalMethodWithoutRoundingCalled
+        return this.value.setScale(scale);
+    }
+
+    public BigDecimal getValue(int scale, RoundingMode roundingMode) {
+        return this.value.setScale(scale, roundingMode);
     }
 
     @Override
