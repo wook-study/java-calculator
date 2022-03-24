@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
+/**
+ * 콘솔로 입력받는 클래스
+ */
 public class InputView {
     private final BufferedReader reader;
 
