@@ -1,5 +1,6 @@
 package com.woogie.calculator.expression;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 /**
@@ -19,6 +20,13 @@ public enum Operator implements Expression {
         this.code = code;
         this.order = order;
         this.biFunction = biFunction;
+    }
+
+    public static Operator of(final String code) {
+        return Arrays.stream(values())
+                     .filter(it -> it.code.equals(code))
+                     .findFirst()
+                     .orElse(null);
     }
 
     public Operand calculate(Operand augend, Operand addend) {

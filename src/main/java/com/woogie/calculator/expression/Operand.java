@@ -34,6 +34,16 @@ public class Operand implements Expression {
         return this.value.setScale(scale, roundingMode);
     }
 
+    public static boolean isSupport(String expression) {
+        try {
+            Integer.parseInt(expression);
+
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
