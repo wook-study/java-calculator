@@ -5,33 +5,33 @@ package com.woogie.calculator.ui;
  */
 public abstract class AbstractCalculatorBehavior implements CalculatorBehavior {
     /**
+     * 계산기 실행 완료 여부를 결정
+     */
+    abstract protected boolean isCompleted();
+
+    /**
      * 계산기가 최초 실행하면 동작
      */
-    abstract protected void doOnStart();
+    abstract protected void start();
 
     /**
      * 계산기 실행이 완료되면 동작
      */
-    abstract protected void doOnComplete();
+    abstract protected void complete();
 
     /**
      * 예외가 발생했을때 동작
      */
-    abstract protected void doOnError(RuntimeException ex);
-
-    /**
-     * 계산기 실행 완료 여부를 결정
-     */
-    abstract protected boolean complete();
+    abstract protected void error(RuntimeException ex);
 
     @Override
     public void run() {
-        while (complete()) {
+        while (isCompleted()) {
             try {
-                doOnStart();
-                doOnComplete();
+                start();
+                complete();
             } catch (RuntimeException ex) {
-                doOnError(ex);
+                error(ex);
             } catch (Exception ex) {
                 System.out.println("오류 발생으로 시스템 종료, message: " + ex.getMessage());
             }

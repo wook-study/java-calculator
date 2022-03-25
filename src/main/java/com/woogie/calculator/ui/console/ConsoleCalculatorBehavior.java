@@ -36,36 +36,27 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
     }
 
     @Override
-    protected void doOnStart() {
+    protected boolean isCompleted() {
+        return true;
+    }
+
+    @Override
+    protected void start() {
         final Menu chosenMenu = chooseMenu();
 
-        switch (chosenMenu) {
-            case FETCH_ALL:
-                // 조회실행
-                printExpressions(repository.findAll());
-
-                break;
-            case CALCULATION:
-                final Operand operand = calculate();
-
-                printCalculatedOperand(operand, 0);
-
-                break;
-        }
+        chosenMenu.execute(
+                () -> printExpressions(repository.findAll()),
+                () -> printCalculatedOperand(calculate(), 0)
+        );
     }
 
     @Override
-    protected void doOnComplete() {
+    protected void complete() {
     }
 
     @Override
-    protected void doOnError(final RuntimeException ex) {
+    protected void error(final RuntimeException ex) {
         printError(ex);
-    }
-
-    @Override
-    protected boolean complete() {
-        return true;
     }
 
     private Menu chooseMenu() {
@@ -111,6 +102,27 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
             } catch (NumberFormatException ex) {
                 throw new IllegalArgumentException("숫자만 입력해주세요.", ex);
             }
+        }
+
+        public void execute(final FetchAll fetchAll, final Calculation calculation) {
+            switch (this) {
+                case FETCH_ALL:
+                    fetchAll.execute();
+                    break;
+                case CALCULATION:
+                    calculation.execute();
+                    break;
+            }
+        }
+
+        @FunctionalInterface
+        private interface FetchAll {
+            void execute();
+        }
+
+        @FunctionalInterface
+        private interface Calculation {
+            void execute();
         }
     }
 }
