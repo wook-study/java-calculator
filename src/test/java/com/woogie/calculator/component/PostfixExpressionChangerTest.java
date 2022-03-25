@@ -14,24 +14,62 @@ class PostfixExpressionChangerTest {
 
     @Test
     void 중위표현을_후위표현식으로_변경성공() {
-        final Queue<Expression> inorderExpressions = new ArrayDeque<>();
-        inorderExpressions.add(new Operand(3));
-        inorderExpressions.add(Operator.ADDITION);
-        inorderExpressions.add(new Operand(2));
-        inorderExpressions.add(Operator.MULTIPLICATION);
-        inorderExpressions.add(new Operand(4));
+        final Queue<Expression> infixExpressions = new ArrayDeque<>();
 
-        final int inorderSize = inorderExpressions.size();
+        infixExpressions.add(new Operand(8));
+        infixExpressions.add(Operator.DIVISION);
+        infixExpressions.add(new Operand(2));
+        infixExpressions.add(Operator.SUBTRACTION);
+        infixExpressions.add(new Operand(3));
+        infixExpressions.add(Operator.ADDITION);
+        infixExpressions.add(new Operand(3));
+        infixExpressions.add(Operator.MULTIPLICATION);
+        infixExpressions.add(new Operand(2));
+
+        final int infixSize = infixExpressions.size();
 
         final PostfixExpressionChanger postfixExpressionChanger = new PostfixExpressionChanger();
 
-        final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(inorderExpressions);
+        final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(infixExpressions);
 
-        assertThat(postfixExpressions.size() == inorderSize).isTrue();
+        postfixExpressions.forEach(System.out::println);
+
+        assertThat(postfixExpressions.size() == infixSize).isTrue();
+
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(8));
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(2));
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.DIVISION);
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(3));
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.SUBTRACTION);
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(3));
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(2));
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.MULTIPLICATION);
+        assertThat(postfixExpressions.poll()).isEqualTo(Operator.ADDITION);
+    }
+
+    @Test
+    void 연산자_우선순위에_맞게_변경한다() {
+        final Queue<Expression> infixExpressions = new ArrayDeque<>();
+
+        infixExpressions.add(new Operand(3));
+        infixExpressions.add(Operator.ADDITION);
+        infixExpressions.add(new Operand(2));
+        infixExpressions.add(Operator.MULTIPLICATION);
+        infixExpressions.add(new Operand(9));
+
+        final int infixSize = infixExpressions.size();
+
+        final PostfixExpressionChanger postfixExpressionChanger = new PostfixExpressionChanger();
+
+        final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(infixExpressions);
+
+        postfixExpressions.forEach(System.out::println);
+
+        assertThat(postfixExpressions.size() == infixSize).isTrue();
 
         assertThat(postfixExpressions.poll()).isEqualTo(new Operand(3));
         assertThat(postfixExpressions.poll()).isEqualTo(new Operand(2));
-        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(4));
+        assertThat(postfixExpressions.poll()).isEqualTo(new Operand(9));
         assertThat(postfixExpressions.poll()).isEqualTo(Operator.MULTIPLICATION);
         assertThat(postfixExpressions.poll()).isEqualTo(Operator.ADDITION);
     }

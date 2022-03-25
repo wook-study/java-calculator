@@ -5,8 +5,9 @@ import com.woogie.calculator.expression.Operand;
 import com.woogie.calculator.expression.Operator;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.ArrayDeque;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +20,7 @@ public class StringToExpressionParser implements ExpressionParser<String> {
     public StringToExpressionParser(final ExpressionValidator<String> validator) {this.validator = validator;}
 
     @Override
-    public List<Expression> parse(String expression) {
+    public Queue<Expression> parse(String expression) {
         if (!validator.validate(expression)) {
             throw new IllegalArgumentException("잘못된 수식");
         }
@@ -28,6 +29,6 @@ public class StringToExpressionParser implements ExpressionParser<String> {
                      .map(it -> Optional.of(it)
                                         .map(expr -> (Expression) Operator.of(expr))
                                         .orElseGet(() -> new Operand(new BigDecimal(it))))
-                     .collect(Collectors.toUnmodifiableList());
+                     .collect(Collectors.toCollection(ArrayDeque::new));
     }
 }

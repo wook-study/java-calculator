@@ -28,8 +28,8 @@ class AdditionTest {
     void 양수와_음수를_입력받아_더한다() {
         final Operable addition = new Addition();
 
-        final Operand result = addition.operate(new Operand(3.5), new Operand(-2.1));
+        final Operand result = addition.operate(new Operand(3.5), new Operand(-5.1));
 
-        assertThat(result).isEqualTo(new Operand(1.4));
+        assertThat(result).isEqualTo(new Operand(-1.6));
     }
 }

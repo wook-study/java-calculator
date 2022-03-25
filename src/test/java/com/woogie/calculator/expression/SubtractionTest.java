@@ -25,11 +25,29 @@ class SubtractionTest {
     }
 
     @Test
+    void 작은양수와_큰양수를_입력받아_뺀다() {
+        final Operable subtraction = new Subtraction();
+
+        final Operand result = subtraction.operate(new Operand(3), new Operand(4));
+
+        assertThat(result).isEqualTo(new Operand(-1));
+    }
+
+    @Test
     void 양수와_음수를_입력받아_뺀다() {
         final Operable subtraction = new Subtraction();
 
         final Operand result = subtraction.operate(new Operand(3.5), new Operand(-2.1));
 
         assertThat(result).isEqualTo(new Operand(5.6));
+    }
+
+    @Test
+    void 음수와_음수를_입력받아_뺀다() {
+        final Operable subtraction = new Subtraction();
+
+        final Operand result = subtraction.operate(new Operand(-3.5), new Operand(-2.1));
+
+        assertThat(result).isEqualTo(new Operand(-1.4));
     }
 }

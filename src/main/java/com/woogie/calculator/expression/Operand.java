@@ -56,4 +56,9 @@ public class Operand implements Expression {
     public int hashCode() {
         return Objects.hash(value.doubleValue());
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value.setScale(0));
+    }
 }

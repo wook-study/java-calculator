@@ -17,15 +17,19 @@ class PostfixCalculatorTest {
         final Calculatable<Queue<Expression>> postfixCalculator = new PostfixCalculator();
 
         final Queue<Expression> expressions = new ArrayDeque<>();
+        expressions.add(new Operand(8));
+        expressions.add(new Operand(2));
+        expressions.add(Operator.DIVISION);
         expressions.add(new Operand(3));
-        expressions.add(new Operand(4));
+        expressions.add(Operator.SUBTRACTION);
+        expressions.add(new Operand(3));
+        expressions.add(new Operand(2));
         expressions.add(Operator.MULTIPLICATION);
-        expressions.add(new Operand(4));
         expressions.add(Operator.ADDITION);
 
         final Operand operand = postfixCalculator.calculate(expressions);
 
-        assertThat(operand).isEqualTo(new Operand(16));
+        assertThat(operand).isEqualTo(new Operand(7));
     }
 
     @Test

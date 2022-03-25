@@ -50,7 +50,7 @@ public class PostfixCalculator implements Calculatable<Queue<Expression>> {
         final Operand augend = operands.pop();
         final Operand addend = operands.pop();
 
-        final Operand result = operator.calculate(augend, addend);
+        final Operand result = operator.calculate(addend, augend);
 
         operands.add(result);
     }

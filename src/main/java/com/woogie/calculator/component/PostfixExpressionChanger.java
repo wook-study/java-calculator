@@ -4,22 +4,27 @@ import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operator;
 
 import java.util.ArrayDeque;
+import java.util.Comparator;
 import java.util.Queue;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * 후위표현식으로 표현방식 변경
  */
 public class PostfixExpressionChanger implements ExpressionChanger {
     private final Queue<Expression> postfixExpressions;
-    private final Queue<Operator> temporaryOperators;
+    private final Stack<Operator> temporaryOperators;
 
     public PostfixExpressionChanger() {
         this.postfixExpressions = new ArrayDeque<>();
-        this.temporaryOperators = new ArrayDeque<>();
+        this.temporaryOperators = new Stack<>();
     }
 
     @Override
     public Queue<Expression> change(final Queue<Expression> expressions) {
+        clear();
+
         while (!expressions.isEmpty()) {
             addOperandsUntilOperator(expressions);
 
@@ -29,12 +34,14 @@ public class PostfixExpressionChanger implements ExpressionChanger {
                 break;
             }
 
-            addOperatorsInOrder((Operator) expression);
+            addTemporaryOperator((Operator) expression);
         }
 
-        postfixExpressions.addAll(temporaryOperators);
+        final Stack<Operator> sortedOperators = changeOrderByPriority();
 
-        return postfixExpressions;
+        postfixExpressions.addAll(sortedOperators);
+
+        return new ArrayDeque<>(postfixExpressions);
     }
 
     private void addOperandsUntilOperator(final Queue<Expression> expressions) {
@@ -49,16 +56,33 @@ public class PostfixExpressionChanger implements ExpressionChanger {
         }
     }
 
-    private void addOperatorsInOrder(final Operator operator) {
-        final Operator previous = temporaryOperators.peek();
+    private void addTemporaryOperator(final Operator operator) {
+        switch (operator) {
+            case MULTIPLICATION:
+            case DIVISION:
+                temporaryOperators.add(operator);
 
-        if (temporaryOperators.isEmpty() || previous.priority(operator)) {
-            temporaryOperators.add(operator);
-        } else {
-            temporaryOperators.poll();
+                break;
+            case ADDITION:
+            case SUBTRACTION:
+                while (!temporaryOperators.empty()) {
+                    postfixExpressions.add(temporaryOperators.pop());
+                }
 
-            temporaryOperators.add(operator);
-            temporaryOperators.add(previous);
+                temporaryOperators.add(operator);
+
+                break;
         }
+    }
+
+    private Stack<Operator> changeOrderByPriority() {
+        return temporaryOperators.stream()
+                                 .sorted(Comparator.comparing(Operator::getOrder))
+                                 .collect(Collectors.toCollection(Stack::new));
+    }
+
+    private void clear() {
+        postfixExpressions.clear();
+        temporaryOperators.clear();
     }
 }

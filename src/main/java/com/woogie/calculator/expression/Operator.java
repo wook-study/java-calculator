@@ -1,16 +1,17 @@
 package com.woogie.calculator.expression;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.BiFunction;
 
 /**
  * 연산자
  */
 public enum Operator implements Expression {
-    ADDITION("+", 0, (augend, addend) -> new Addition().operate(augend, addend)),
-    SUBTRACTION("-", 0, (augend, addend) -> new Subtraction().operate(augend, addend)),
-    MULTIPLICATION("*", 1, (augend, addend) -> new Multiplication().operate(augend, addend)),
-    DIVISION("/", 1, (augend, addend) -> new Division().operate(augend, addend));
+    ADDITION("+", 1, (augend, addend) -> new Addition().operate(augend, addend)),
+    SUBTRACTION("-", 1, (augend, addend) -> new Subtraction().operate(augend, addend)),
+    MULTIPLICATION("*", 0, (augend, addend) -> new Multiplication().operate(augend, addend)),
+    DIVISION("/", 0, (augend, addend) -> new Division().operate(augend, addend));
 
     private final String code;
     private final int order;
@@ -29,11 +30,16 @@ public enum Operator implements Expression {
                      .orElse(null);
     }
 
+    public int getOrder() {
+        return order;
+    }
+
     public Operand calculate(Operand augend, Operand addend) {
         return biFunction.apply(augend, addend);
     }
 
-    public boolean priority(Operator operator) {
-        return this.order > operator.order;
+    @Override
+    public String toString() {
+        return this.code;
     }
 }

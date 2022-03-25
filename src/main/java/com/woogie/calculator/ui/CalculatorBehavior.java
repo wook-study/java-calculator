@@ -6,7 +6,7 @@ package com.woogie.calculator.ui;
 public interface CalculatorBehavior {
 
     /**
-     * 계산기 어플리케이션을 최초 실행
+     * 계산기 어플리케이션 동작
      */
-    void start();
+    void run();
 }
