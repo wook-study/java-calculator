@@ -1,4 +1,4 @@
-package com.woogie.calculator.component;
+package com.woogie.calculator.parser;
 
 import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operand;

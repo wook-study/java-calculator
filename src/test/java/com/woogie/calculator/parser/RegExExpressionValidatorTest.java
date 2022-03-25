@@ -1,4 +1,4 @@
-package com.woogie.calculator.component;
+package com.woogie.calculator.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

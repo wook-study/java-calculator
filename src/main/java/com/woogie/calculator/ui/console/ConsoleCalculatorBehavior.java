@@ -2,9 +2,9 @@ package com.woogie.calculator.ui.console;
 
 import com.woogie.calculator.component.Calculatable;
 import com.woogie.calculator.component.ExpressionChanger;
-import com.woogie.calculator.component.ExpressionParser;
 import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operand;
+import com.woogie.calculator.parser.ExpressionParser;
 import com.woogie.calculator.repository.ExpressionHistoryRepository;
 import com.woogie.calculator.ui.AbstractCalculatorBehavior;
 

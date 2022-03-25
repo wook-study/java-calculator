@@ -1,4 +1,4 @@
-package com.woogie.calculator.component;
+package com.woogie.calculator.parser;
 
 /**
  * 정규표현식으로 문자열이 표현식으로 파싱할 수 있는지 검사
