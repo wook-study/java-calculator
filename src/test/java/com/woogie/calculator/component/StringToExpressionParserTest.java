@@ -3,6 +3,7 @@ package com.woogie.calculator.component;
 import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operand;
 import com.woogie.calculator.expression.Operator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -12,7 +13,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class StringToExpressionParserTest {
 
-    private final ExpressionParser<String> expressionParser = new StringToExpressionParser(new RegExExpressionValidator());
+    private ExpressionParser<String> expressionParser;
+
+    @BeforeEach
+    void setUp() {
+        expressionParser = new StringToExpressionParser(new RegExExpressionValidator());
+    }
 
     @Test
     void 문자열을_표현식으로_파싱_성공() {

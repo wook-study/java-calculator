@@ -7,18 +7,10 @@ import java.io.InputStreamReader;
 /**
  * 콘솔로 입력받는 클래스
  */
-public class InputView {
-    private final BufferedReader reader;
+public final class InputView {
+    private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public InputView(BufferedReader reader) {
-        this.reader = reader;
-    }
-
-    public static InputView create() {
-        return new InputView(new BufferedReader(new InputStreamReader(System.in)));
-    }
-
-    public String read() {
+    private static String read() {
         try {
             return reader.readLine();
         } catch (IOException e) {
@@ -26,11 +18,11 @@ public class InputView {
         }
     }
 
-    public String readChosenMenu() {
+    public static String readChosenMenu() {
         return read();
     }
 
-    public String readExpression() {
+    public static String readExpression() {
         return read();
     }
 }

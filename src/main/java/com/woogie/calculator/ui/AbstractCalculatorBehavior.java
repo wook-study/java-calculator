@@ -1,20 +1,22 @@
 package com.woogie.calculator.ui;
 
 public abstract class AbstractCalculatorBehavior implements CalculatorBehavior {
-    abstract protected void start();
+    abstract protected void doOnStart();
 
-    abstract protected void complete();
+    abstract protected void doOnComplete();
 
-    abstract protected void error(RuntimeException ex);
+    abstract protected void doOnError(RuntimeException ex);
+
+    abstract protected boolean complete();
 
     @Override
     public void run() {
-        while (true) {
+        while (complete()) {
             try {
-                start();
-                complete();
+                doOnStart();
+                doOnComplete();
             } catch (RuntimeException ex) {
-                error(ex);
+                doOnError(ex);
             } catch (Exception ex) {
                 System.out.println("오류 발생으로 시스템 종료, message: " + ex.getMessage());
             }

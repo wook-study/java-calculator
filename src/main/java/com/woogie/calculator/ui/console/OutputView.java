@@ -10,7 +10,7 @@ public final class OutputView {
     private OutputView() {
     }
 
-    public static void println(Object message) {
+    private static void println(Object message) {
         System.out.println(message);
     }
 
@@ -28,5 +28,9 @@ public final class OutputView {
 
     public static void printCalculatedOperand(Operand operand, int scale) {
         println(operand.getValue(scale));
+    }
+
+    public static void printError(RuntimeException ex) {
+        println(ex.getMessage());
     }
 }

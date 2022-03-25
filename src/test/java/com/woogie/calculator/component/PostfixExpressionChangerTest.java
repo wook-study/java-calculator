@@ -3,6 +3,7 @@ package com.woogie.calculator.component;
 import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operand;
 import com.woogie.calculator.expression.Operator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayDeque;
@@ -11,6 +12,13 @@ import java.util.Queue;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PostfixExpressionChangerTest {
+
+    private PostfixExpressionChanger postfixExpressionChanger;
+
+    @BeforeEach
+    void setUp() {
+        postfixExpressionChanger = new PostfixExpressionChanger();
+    }
 
     @Test
     void 중위표현을_후위표현식으로_변경성공() {
@@ -28,11 +36,7 @@ class PostfixExpressionChangerTest {
 
         final int infixSize = infixExpressions.size();
 
-        final PostfixExpressionChanger postfixExpressionChanger = new PostfixExpressionChanger();
-
         final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(infixExpressions);
-
-        postfixExpressions.forEach(System.out::println);
 
         assertThat(postfixExpressions.size() == infixSize).isTrue();
 
@@ -59,11 +63,7 @@ class PostfixExpressionChangerTest {
 
         final int infixSize = infixExpressions.size();
 
-        final PostfixExpressionChanger postfixExpressionChanger = new PostfixExpressionChanger();
-
         final Queue<Expression> postfixExpressions = postfixExpressionChanger.change(infixExpressions);
-
-        postfixExpressions.forEach(System.out::println);
 
         assertThat(postfixExpressions.size() == infixSize).isTrue();
 

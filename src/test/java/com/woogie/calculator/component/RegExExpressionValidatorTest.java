@@ -1,13 +1,18 @@
 package com.woogie.calculator.component;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RegExExpressionValidatorTest {
 
-    private final RegExExpressionValidator expressionValidator = new RegExExpressionValidator();
+    private RegExExpressionValidator expressionValidator;
+
+    @BeforeEach
+    void setUp() {
+        expressionValidator = new RegExExpressionValidator();
+    }
 
     @Test
     void 표현식으로_파싱_가능_하면__true() {
