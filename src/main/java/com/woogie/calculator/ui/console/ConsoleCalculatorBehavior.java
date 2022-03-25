@@ -5,6 +5,7 @@ import com.woogie.calculator.component.ExpressionChanger;
 import com.woogie.calculator.component.ExpressionParser;
 import com.woogie.calculator.expression.Expression;
 import com.woogie.calculator.expression.Operand;
+import com.woogie.calculator.repository.ExpressionHistoryRepository;
 import com.woogie.calculator.ui.AbstractCalculatorBehavior;
 
 import java.util.ArrayDeque;
@@ -24,12 +25,14 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
     private final ExpressionParser<String> expressionParser;
     private final ExpressionChanger expressionChanger;
     private final Calculatable<Queue<Expression>> calculator;
+    private final ExpressionHistoryRepository repository;
 
     public ConsoleCalculatorBehavior(ExpressionParser<String> expressionParser, ExpressionChanger expressionChanger,
-                                     Calculatable<Queue<Expression>> calculator) {
+                                     Calculatable<Queue<Expression>> calculator, ExpressionHistoryRepository repository) {
         this.expressionParser = expressionParser;
         this.expressionChanger = expressionChanger;
         this.calculator = calculator;
+        this.repository = repository;
     }
 
     @Override
@@ -39,11 +42,15 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
         switch (chosenMenu) {
             case FETCH_ALL:
                 // 조회실행
-                throw new IllegalStateException("구현 필요함");
+                printExpressions(repository.findAll());
+
+                break;
             case CALCULATION:
                 final Operand operand = calculate();
 
                 printCalculatedOperand(operand, 0);
+
+                break;
         }
     }
 
@@ -81,6 +88,8 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
         final String expression = readExpression();
         final Queue<Expression> expressions = prepareExpressions(expression);
 
+        repository.save(expression);
+
         return calculator.calculate(expressions);
     }
 
@@ -102,10 +111,6 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
             } catch (NumberFormatException ex) {
                 throw new IllegalArgumentException("숫자만 입력해주세요.", ex);
             }
-        }
-
-        public int getNumber() {
-            return this.number;
         }
     }
 }

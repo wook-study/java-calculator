@@ -46,8 +46,10 @@ public class Operand implements Expression {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Operand)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Operand))
+            return false;
         Operand operand = (Operand) o;
         return Objects.equals(value.doubleValue(), operand.value.doubleValue());
     }
@@ -59,6 +61,6 @@ public class Operand implements Expression {
 
     @Override
     public String toString() {
-        return String.valueOf(value.setScale(0));
+        return String.valueOf(this.value);
     }
 }
