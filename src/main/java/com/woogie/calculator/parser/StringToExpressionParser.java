@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,7 +23,7 @@ public class StringToExpressionParser implements ExpressionParser<String> {
     @Override
     public Queue<Expression> parse(String expression) {
         if (!validator.validate(expression)) {
-            throw new IllegalArgumentException("잘못된 수식");
+            throw new IllegalArgumentException("잘못된 수식\n피연산자 + 연산자 + 피연산자");
         }
 
         return Stream.of(expression.split(" "))

@@ -79,9 +79,11 @@ public class ConsoleCalculatorBehavior extends AbstractCalculatorBehavior {
         final String expression = readExpression();
         final Queue<Expression> expressions = prepareExpressions(expression);
 
-        repository.save(expression);
+        final Operand result = calculator.calculate(expressions);
 
-        return calculator.calculate(expressions);
+        repository.save(String.join(" = ", expression, result.toString()));
+
+        return result;
     }
 
     private enum Menu {
